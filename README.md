@@ -299,3 +299,15 @@ price FLOAT NOT NULL,
 FOREIGN KEY (user_id) REFERENCES users(id),
 FOREIGN KEY (show_id) REFERENCES shows(id)
 );
+
+## Postman Collection
+
+The Postman collection for this API is available in the repository under the `postman/` folder.
+
+### How to Import
+1. Download the `Movie_Booking_API.postman_collection.json` file from the repository.
+2. Open Postman and click on the **Import** button.
+3. Select the downloaded `.json` file and click **Open**.
+4. The collection will now appear in your Postman under **Collections**.
+
+You can use this collection to test all API endpoints directly in Postman.
