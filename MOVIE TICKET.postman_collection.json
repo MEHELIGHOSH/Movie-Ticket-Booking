@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "8be8b146-2b86-4d8f-9723-3b0544ba06e6",
+		"name": "MOVIE TICKET",
+		"description": "# Movie Booking API Documentation\n\nThe **Movie Booking API** allows users to manage movies, shows, and bookings. It also includes dynamic ticket pricing and email notifications for bookings.\n\n## Features\n\n- User authentication with JWT.\n    \n- Role-based access control (theater owners vs. regular users).\n    \n- Operations for movies and shows.\n    \n- Dynamic ticket pricing based on seat occupancy and show timing.\n    \n- Email notifications for booking confirmation.\n    \n\n## Base URL\n\n```\ntexthttp://localhost:3000\n\n ```\n\n## Endpoints:\n\n- Health Check\n    \n- Authentication\n    \n- Movies\n    \n- Shows\n    \n- Booking\n    \n- Price simulation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42796842"
+	},
+	"item": [
+		{
+			"name": "Server Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User LOGIN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"user1\",\r\n  \"password\": \"pass1\",\r\n  \"role\": \"user\" // or \"theater\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Theater LOGIN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"owner1\",\r\n  \"password\": \"password1\",\r\n  \"role\": \"theater\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adding Movie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InRoZWF0ZXJfb3duZXIiLCJpYXQiOjE3NDE1MjY3MTYsImV4cCI6MTc0MTUzMDMxNn0.moChKtGIQcSOA-Q_Ojk8RZF4lcua8JujzD8__W4hmlM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Hamilton\",\r\n  \"genre\": \"Drama\",\r\n  \"duration\": 148\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movies filter on genre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/movies?genre=Drama",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies"
+					],
+					"query": [
+						{
+							"key": "genre",
+							"value": "Drama"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adding a Show",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InRoZWF0ZXJfb3duZXIiLCJpYXQiOjE3NDE1MjY3MTYsImV4cCI6MTc0MTUzMDMxNn0.moChKtGIQcSOA-Q_Ojk8RZF4lcua8JujzD8__W4hmlM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"movie_id\": 1,\r\n  \"total_seats\": 100,\r\n  \"base_price\": 200,\r\n  \"show_time\": \"2025-03-10 18:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/shows",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"shows"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sending confrimation email and price upon booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user_id\": 1,\r\n  \"show_id\": 1,\r\n  \"seat_number\": 10,\r\n  \"email\": \"user@example.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Getting movies details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/shows?movie_id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"shows"
+					],
+					"query": [
+						{
+							"key": "movie_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
